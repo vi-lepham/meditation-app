@@ -25,7 +25,6 @@ const app = () => {
         }
         static timeDisplay(option) {
             fakeDuration = option.dataset.time;
-            const timer = document.querySelector('.timer');
             let minutes = Math.floor(fakeDuration / 60);
             let seconds = Math.floor(fakeDuration % 60);
             if (minutes < 10) {
@@ -40,11 +39,7 @@ const app = () => {
             audio.ontimeupdate = () => {
                 const outline = document.querySelector('.moving-outline circle');
                 const outlineLength = outline.getTotalLength();
-
-                // Set outline stroke dasharray
-                outline.style.strokeDasharray = outlineLength;
-
-                // Calculate time progress
+                // Countdown time progress
                 fakeDuration = option.dataset.time;
                 let currentTime = audio.currentTime;
                 let elapsed = fakeDuration - currentTime;
@@ -57,8 +52,9 @@ const app = () => {
                     seconds = `0${Math.floor(elapsed % 60)}`
                 }
                 timer.textContent = `${minutes}:${seconds}`;
-
-
+                // Set outline stroke dasharray
+                outline.style.strokeDasharray = outlineLength;
+                // Animate progress bar
                 let progress = outlineLength - (currentTime / fakeDuration) * outlineLength;
                 outline.style.strokeDasharray = progress;
                 
@@ -88,19 +84,8 @@ const app = () => {
     timeBtns.forEach(option => {
         option.addEventListener('click', () => {
             // Display time
-            let minutes = Math.floor(fakeDuration / 60);
-            let seconds = Math.floor(fakeDuration % 60);
-            if (minutes < 10) {
-                minutes = `0${Math.floor(fakeDuration / 60)}`
-            }
-            if (seconds < 10) {
-                seconds = `0${Math.floor(fakeDuration % 60)}`
-            }
-            timer.textContent = `${minutes}:${seconds}`;
-            
-            // Countdown
             UI.timeDisplay(option);
-            // Animate circle progress bar
+            // Animate progress bar & countdown
             UI.audioTimeUpdate(option);
         })
     })
