@@ -13,8 +13,10 @@
 }
 
 .background video {
-    max-height: 100vh;
+    width: 100%;
+    height: 100vh;
     object-fit: cover;
+    display: none;
 }
 
 .content {
@@ -23,8 +25,8 @@
     color: white;
 
     width: 100%;
-    height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
 }
@@ -38,11 +40,11 @@ button {
 }
 
 .theme {
-    flex: 1;
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     z-index: 1;
+    width: 50%;
 }
 .theme img {
     width: 40px;
@@ -55,12 +57,11 @@ button {
     padding: 15px;
     margin-bottom: 20px;
     cursor: pointer;
-    background-color: rgba(255, 245, 238, 0.26);
+    background-color: rgba(255, 245, 238, 0.24);
 }
 
 
 .player-container {
-    flex: 2;
     position: relative;
     width: 100%;
     height: 100%;
@@ -69,7 +70,14 @@ button {
 .title {
     text-align: center;
     margin-top: 5vh;
+    margin-bottom: 5vh;
     font-size: 30px;
+    z-index: 1;
+}
+
+.description {
+    z-index: 1;
+    margin-bottom: 5vh;
 }
 
 .player-container img, .player-container svg {
@@ -81,6 +89,13 @@ button {
     max-width: 100%;
 }
 
+.player-container svg {
+    transform: translateY(-50%) translateX(-50%) rotate(-90deg);
+}
+.player-container img {
+    width: 60px;
+}
+
 .play {
     width: 20%;
     cursor: pointer;
@@ -88,15 +103,10 @@ button {
     transition: all 0.5s ease;
 }
 
-.play:hover {
-    width: 21%;
-}
-
 .time-btn {
-    flex: 1;
     text-align: center;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     z-index: 99;
 }
 
@@ -104,7 +114,7 @@ button {
     color: white;
     border: solid 3px white;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 17px;
     padding: 10px 20px;
     margin: 30px;
     transition: all 0.5s ease;
@@ -113,5 +123,11 @@ button {
 .time-btn button:hover {
     color: #fa8072;
     background-color: white;
+}
+
+.timer {
+    text-align: center;
+    margin-top: 70vh;
+    font-size: 30px;
 }
 

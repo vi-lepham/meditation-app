@@ -15,7 +15,8 @@
         </video>
     </div>
     <div class="content">
-        
+        <div class="title">Daily Meditation</div>
+        <div class="description">First, pick a theme and time</div>
         <div class="theme">
             <button class="rain" data-sound="./sounds/rain.mp3" data-video="./video/rain2.mp4">
                 <img src="./svg/rain.svg" alt="rain">
@@ -25,28 +26,30 @@
             </button>
         </div>
 
-        <div class="player-container">
-            <div class="title">Daily Meditation</div>
+        <div class="time-btn">
+            <button class="time" data-time="300">5 Min</button>
+            <button class="time" data-time="600">10 Min</button>
+            <button>Custom</button>
+        </div>
 
+        <div class="player-container">
+            <div class="timer">00:00</div>
             <div class="play-btn">
                 <audio>
                     <source src="./sounds/rain.mp3">
                 </audio>
+
                 <img class ="play" src="./svg/play.svg">
+                
                 <svg class="outline" width="300" height="300" viewBox="0 0 453 453" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="226.5" cy="226.5" r="216.5" stroke="white" stroke-width="10"/>
                     </svg>
                 <svg class="moving-outline" width="300" height="300" viewBox="0 0 453 453" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="226.5" cy="226.5" r="216.5" stroke="yellow" stroke-width="10"/>
+                    <circle cx="226.5" cy="226.5" r="216.5" stroke="#fff67d" stroke-width="10"/>
                     </svg>
-                <h3 class="timer">00:00</h3>
             </div>
         </div>
 
-        <div class="time-btn">
-            <button data-time="300">5 Min</button>
-            <button data-time="600">10 Min</button>
-        </div>
 
     </div>
 
