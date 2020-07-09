@@ -4,6 +4,11 @@ const app = () => {
     const video = document.querySelector('video');
     const timer = document.querySelector('.timer');
     let duration;
+    
+    const outline = document.querySelector('.moving-outline circle');
+    const outlineLength = outline.getTotalLength();
+    outline.style.strokeDashoffset = outlineLength;
+    outline.style.strokeDasharray = outlineLength;
 
     // UI class
     class UI {
@@ -57,8 +62,6 @@ const app = () => {
         }
         static audioTimeUpdate(option) {
             audio.ontimeupdate = () => {
-                const outline = document.querySelector('.moving-outline circle');
-                const outlineLength = outline.getTotalLength();
 
                 // Calculate elapsed time
                 duration = option.dataset.time;
@@ -78,13 +81,16 @@ const app = () => {
                 // Update time display
                 timer.textContent = `${minutes}:${seconds}`;
 
-                // Set outline stroke dasharray
-                outline.style.strokeDasharray = outlineLength;
-
                 // Animate progress bar
-                let progress = outlineLength - (currentTime / duration) * outlineLength;
-                outline.style.strokeDasharray = progress;
+                let progress = (elapsed / duration) * outlineLength;
+                outline.style.strokeDashoffset = progress;
+                console.log(progress)
                 
+                // Stop audio and video when elapsed time end
+                if (elapsed = 0) {
+                    audio.pause();
+                    video.pause();
+                }
             }
         } 
         static addCustomTime(input) {
