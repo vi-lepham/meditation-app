@@ -3,7 +3,7 @@ const app = () => {
     const audio = document.querySelector('audio');
     const video = document.querySelector('video');
     const timer = document.querySelector('.timer');
-    let fakeDuration = 600;
+    let duration;
 
     // UI class
     class UI {
@@ -24,42 +24,84 @@ const app = () => {
             }
         }
         static timeDisplay(option) {
-            fakeDuration = option.dataset.time;
-            let minutes = Math.floor(fakeDuration / 60);
-            let seconds = Math.floor(fakeDuration % 60);
+            // Set duration to be option's time attribute
+            duration = option.dataset.time;
+
+            // Calculate minutes and seconds
+            let minutes = Math.floor(duration / 60);
+            let seconds = Math.floor(duration % 60);
+
+            // Add 0 if minute/second value is less than 10
             if (minutes < 10) {
-                minutes = `0${Math.floor(fakeDuration / 60)}`
+                minutes = `0${Math.floor(duration / 60)}`
             }
             if (seconds < 10) {
-                seconds = `0${Math.floor(fakeDuration % 60)}`
+                seconds = `0${Math.floor(duration % 60)}`
             }
+
+            // Display time
             timer.textContent = `${minutes}:${seconds}`;
+        }
+        static selectedButton(option) {
+            // Change button color to indicate clicked
+            option.classList.add('active')
+            // Remove class if another button is clicked
+            const active = document.querySelectorAll('.active');
+            const activeArray = Array.from(active);
+            console.log(activeArray)
+            // Remove class from buttons that are not selected
+            if (activeArray.length > 1) {
+                let inactiveArray = activeArray.filter(activeBtn => activeBtn.innerHTML !== option.innerHTML);
+                inactiveArray.map(button => button.classList.remove('active'));
+            }
         }
         static audioTimeUpdate(option) {
             audio.ontimeupdate = () => {
                 const outline = document.querySelector('.moving-outline circle');
                 const outlineLength = outline.getTotalLength();
-                // Countdown time progress
-                fakeDuration = option.dataset.time;
+
+                // Calculate elapsed time
+                duration = option.dataset.time;
                 let currentTime = audio.currentTime;
-                let elapsed = fakeDuration - currentTime;
+                let elapsed = duration - currentTime;
                 let minutes = Math.floor(elapsed / 60);
                 let seconds = Math.floor(elapsed % 60);
+
+                // Add 0 if minute/second value is less than 10
                 if (minutes < 10) {
                     minutes = `0${Math.floor(elapsed / 60)}`
                 }
                 if (seconds < 10) {
                     seconds = `0${Math.floor(elapsed % 60)}`
                 }
+
+                // Update time display
                 timer.textContent = `${minutes}:${seconds}`;
+
                 // Set outline stroke dasharray
                 outline.style.strokeDasharray = outlineLength;
+
                 // Animate progress bar
-                let progress = outlineLength - (currentTime / fakeDuration) * outlineLength;
+                let progress = outlineLength - (currentTime / duration) * outlineLength;
                 outline.style.strokeDasharray = progress;
                 
             }
         } 
+        static addCustomTime(input) {
+            const timeList = document.querySelector('.time-btn');
+            
+            // Create new time button
+            const newTimeButton = document.createElement('button');
+            newTimeButton.className = 'time';
+            newTimeButton.innerHTML = `${input} Min`
+            
+            // Calculate duration attribute
+            const duration = input * 60;
+            newTimeButton.setAttribute('data-time', duration)
+            
+            // Append new button to list
+            timeList.insertBefore(newTimeButton, document.querySelector('.custom-time'));
+        }
     }
 
     // Event listener for theme buttons
@@ -79,16 +121,49 @@ const app = () => {
         
     })
 
+    // Event listener for custom time button
+    const customTime = document.querySelector('.custom-time')
+    customTime.addEventListener('click', () => {
+        customTime.classList.toggle('open');
+        document.querySelector('.custom-time-modal').classList.toggle('open');
+    })
+
+    // Event listener for custom time form submission
+    const customTimeForm = document.querySelector('form');
+    const timeInput = document.getElementById('time');
+    customTimeForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        if (!timeInput.value) {
+            const errorMessage = document.querySelector('.error')
+            errorMessage.innerHTML = 'Please input your custom time';
+            setTimeout(() => {
+                errorMessage.innerHTML = '';
+            }, 3000)
+        }
+
+        // Add new custom time button
+        UI.addCustomTime(timeInput.value);
+        // Clear input field
+        timeInput.value = '';
+        // Close modal
+        document.querySelector('.custom-time-modal').classList.remove('open');
+
+    })
+
     // Event listener for time buttons
-    const timeBtns = document.querySelectorAll ('.time')
+    const timeBtns = document.querySelectorAll('.time')
     timeBtns.forEach(option => {
         option.addEventListener('click', () => {
+            // Indicate selected button
+            UI.selectedButton(option)
             // Display time
             UI.timeDisplay(option);
             // Animate progress bar & countdown
             UI.audioTimeUpdate(option);
         })
     })
+    
 }
 
 app();

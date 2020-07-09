@@ -17,6 +17,24 @@
     <div class="content">
         <div class="title">Daily Meditation</div>
         <div class="description">First, pick a theme and time</div>
+        <div class="time-btn">
+            <button class="time" data-time="300">5 Min</button>
+            <button class="time" data-time="600">10 Min</button>
+            <button class="custom-time">Custom</button>
+        </div>
+        <div class="custom-time-modal">
+            <div class="wrapper">
+                <h3>How long would you like to meditate?</h3>
+                <form>
+                    <div>
+                        <input type="number" name="number" id="time">
+                        <label>Minutes</label>
+                    </div>
+                    <div class="error"></div>
+                    <input type="submit" value="Set my time">
+                </form>
+            </div>
+        </div>
         <div class="theme">
             <button class="rain" data-sound="./sounds/rain.mp3" data-video="./video/rain2.mp4">
                 <img src="./svg/rain.svg" alt="rain">
@@ -25,17 +43,10 @@
                 <img src="./svg/beach.svg" alt="beach">
             </button>
         </div>
-
-        <div class="time-btn">
-            <button class="time" data-time="300">5 Min</button>
-            <button class="time" data-time="600">10 Min</button>
-            <button>Custom</button>
-        </div>
-
         <div class="player-container">
             <div class="timer">00:00</div>
             <div class="play-btn">
-                <audio>
+                <audio loop>
                     <source src="./sounds/rain.mp3">
                 </audio>
 
