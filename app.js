@@ -53,7 +53,6 @@ const app = () => {
             // Remove class if another button is clicked
             const active = document.querySelectorAll('.active');
             const activeArray = Array.from(active);
-            console.log(activeArray)
             // Remove class from buttons that are not selected
             if (activeArray.length > 1) {
                 let inactiveArray = activeArray.filter(activeBtn => activeBtn.innerHTML !== option.innerHTML);
@@ -84,7 +83,6 @@ const app = () => {
                 // Animate progress bar
                 let progress = (elapsed / duration) * outlineLength;
                 outline.style.strokeDashoffset = progress;
-                console.log(progress)
                 
                 // Stop audio and video when elapsed time end
                 if (elapsed = 0) {
@@ -116,7 +114,6 @@ const app = () => {
         theme.addEventListener('click', () => {
             // Change audio and BG
             UI.changeAudioBg(theme)
-            console.log(theme.dataset.sound)
         })
     })
 
