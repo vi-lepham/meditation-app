@@ -151,17 +151,33 @@ const app = () => {
 
     })
 
+    // Handle time button click function
+    const handleTimeButtons = (option) => {
+        // Indicate selected button
+        UI.selectedButton(option)
+        // Display time
+        UI.timeDisplay(option);
+        // Animate progress bar & countdown
+        UI.audioTimeUpdate(option);
+    }
+
     // Event listener for time buttons
     const timeBtns = document.querySelectorAll('.time')
     timeBtns.forEach(option => {
-        option.addEventListener('click', () => {
-            // Indicate selected button
-            UI.selectedButton(option)
-            // Display time
-            UI.timeDisplay(option);
-            // Animate progress bar & countdown
-            UI.audioTimeUpdate(option);
+        option.addEventListener('click', (e) => handleTimeButtons(e.target))
+    })
+
+    // Observe added nodes to timeBtns
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(record => {
+            record.addedNodes.forEach(button => {
+                button.addEventListener('click', (e) => handleTimeButtons(e.target))
+            })
         })
+    })
+    const timeList = document.querySelector('.time-btn')
+    observer.observe(timeList, {
+        childList: true
     })
     
 }
