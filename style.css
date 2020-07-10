@@ -9,17 +9,23 @@
     --secondary-color: rgb(248, 144, 132);
 }
 
+body {
+    width: 100vw;
+    height: 100%;
+    overflow-x: hidden;
+}
+
 .background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
 
 .background video {
-    width: 100%;
-    height: 100vh;
+    min-width: 100%;
+    height: 100%;
     object-fit: cover;
     display: none;
 }
@@ -34,6 +40,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+   
 }
 
 button {
@@ -57,14 +64,15 @@ button::-moz-focus-inner {
     padding-bottom: 2%;
     border-radius: 10px;
     margin-top: 5%;
+    width: 600px;
 }
 .theme {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
     z-index: 1;
-    width: 400px;
-    margin: 0 auto;
+    width: 100%;
     margin-bottom: 7%;
 }
 .theme img {
@@ -83,7 +91,7 @@ button::-moz-focus-inner {
 .player-container {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 70vh;
     margin-bottom: 5%;
 }
 
@@ -124,14 +132,13 @@ button::-moz-focus-inner {
 }
 
 .time-btn {
-    text-align: center;
+    
     display: flex;
     justify-content: space-between;
-    align-items: center;
     flex-wrap: wrap;
     z-index: 99;
-    width: 500px;
-    margin: 0 30px;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .time-btn button {
@@ -140,8 +147,9 @@ button::-moz-focus-inner {
     border-radius: 10px;
     font-size: 17px;
     padding: 10px 20px;
-    margin: 30px auto;
+    margin: 30px 10px;
     transition: all 0.5s ease;
+    width: fit-content;
 }
 
 .time-btn button.active {
@@ -205,4 +213,31 @@ input[type="submit"] {
     font-size: 11px;
     color: red;
     margin-bottom: 5%;
+}
+
+@media (min-width: 401px) and (max-width: 1100px) {
+    .player-container img, .player-container svg {
+        top: 45%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .description {
+        margin: 10%;
+    }
+    .intro-container{
+        width: 350px;
+    }
+    .time-btn {
+        margin: 5px auto;
+        width: 80%;
+    }
+    .time-btn button {
+        margin: 10px;
+    }
+    .theme {
+        margin-top: 50px;
+    }
+    .player-container img, .player-container svg {
+        top: 60%;
+    }
 }

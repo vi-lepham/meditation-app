@@ -7,6 +7,8 @@ const app = () => {
     
     const outline = document.querySelector('.moving-outline circle');
     const outlineLength = outline.getTotalLength();
+    outline.style.strokeDasharray = outlineLength;
+    outline.style.strokeDashoffset = outlineLength;
 
     // UI class
     class UI {
