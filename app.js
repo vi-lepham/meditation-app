@@ -89,7 +89,7 @@ const app = () => {
                     audio.pause();
                     video.pause();
                     timer.textContent = '00:00';
-                    playBtn.src = './svg/pause.svg';
+                    playBtn.src = './svg/play.svg';
                 }
             }
         } 
