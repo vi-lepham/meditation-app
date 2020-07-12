@@ -90,6 +90,7 @@ const app = () => {
                     video.pause();
                     timer.textContent = '00:00';
                     playBtn.src = './svg/play.svg';
+                    outline.style.strokeDasharray = outlineLength;
                 }
             }
         } 
