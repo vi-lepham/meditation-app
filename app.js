@@ -85,7 +85,7 @@ const app = () => {
                 outline.style.strokeDashoffset = progress;
                 
                 // Stop audio and video when elapsed time end
-                if (elapsed = 0) {
+                if (elapsed < 0.1) {
                     audio.pause();
                     video.pause();
                 }
