@@ -87,6 +87,9 @@ button::-moz-focus-inner {
     cursor: pointer;
     background-color: var(--secondary-color);
 }
+.theme button.selected {
+    border: solid 2px yellow;
+}
 
 .player-container {
     position: relative;
@@ -155,6 +158,7 @@ button::-moz-focus-inner {
 .time-btn button.active {
     background-color: var(--secondary-color);
     color: white;
+    border: 2px solid yellow;
 }
 
 .time-btn button:hover {

@@ -117,6 +117,8 @@ const app = () => {
         theme.addEventListener('click', () => {
             // Change audio and BG
             UI.changeAudioBg(theme)
+            // Indicate selected button
+            theme.classList.toggle('selected')
         })
     })
 
